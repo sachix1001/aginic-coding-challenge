@@ -17,7 +17,6 @@ function App() {
 
   function onClick() {
     axios.post("job", { URL });
-    console.log("onClick -> URL", URL)
   }
 
   return (
@@ -43,14 +42,21 @@ function App() {
       <br />
       <Form.Label>Job state</Form.Label>
       {jobs.map((job, i) => (
-        <JobState id={job.URL} state={job.complete} key={i}></JobState>
+        <JobState
+          id={job.URL}
+          state={job.state}
+          completed={job.completed}
+          key={i}
+        ></JobState>
       ))}
     </div>
   );
 }
 
 function JobState(props) {
-  const { id, state } = props;
+  const { id, completed } = props;
+  let { state } = props;
+  state = completed ? state : "Processing...";
   return (
     <ListGroup>
       <ListGroup.Item>

@@ -19,7 +19,7 @@
   },
   "scripts": {
     "nf": "nf start",
-    "start": "node /server/",
+    "start": "node ./server/",
     "react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

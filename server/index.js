@@ -6,8 +6,8 @@ const app = setupServer();
 
 (async () => {
   try {
-    console.log("Running migrations...");
-    await db.migrate.latest();
+    // console.log("Running migrations...");
+    // await db.migrate.latest();
 
     console.log("Starting express...");
     app.listen(PORT, () => {

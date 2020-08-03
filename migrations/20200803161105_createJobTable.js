@@ -6,7 +6,7 @@ exports.up = function (knex) {
     table.string("URL").notNullable();
     table.string("state");
     table.integer("attempt").defaultTo(0);
-    table.boolean("complete").defaultTo(false);
+    table.boolean("completed").defaultTo(false);
   });
 };
 
