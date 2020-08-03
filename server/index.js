@@ -1,10 +1,14 @@
 const { setupServer } = require("./app");
+const db = require("./knex");
 const PORT = process.env.PORT || 4000;
 
 const app = setupServer();
 
 (async () => {
   try {
+    console.log("Running migrations...");
+    await db.migrate.latest();
+
     console.log("Starting express...");
     app.listen(PORT, () => {
       console.log(`App listening on port ${PORT}!`);
