@@ -6,7 +6,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const jobs = [{ id: 1, state: "progress" },{ id: 1000, state: "progress" }];
+  const jobs = [
+    { id: 1, state: "progress" },
+    { id: 1000, state: "progress" },
+  ];
   return (
     <div className="container">
       <div className="formContainer">
@@ -22,17 +25,17 @@ function App() {
       </div>
       <br />
       <Form.Label>Job state</Form.Label>
-      {jobs.map((job) => (
-        <JobStatus id={job.id} state={job.status} color="black"></JobStatus>
+      {jobs.map((job, i) => (
+        <JobState id={job.id} state={job.status} key={i}></JobState>
       ))}
     </div>
   );
 }
 
-function JobStatus(props) {
-  const { id, state, color, progress } = props;
+function JobState(props) {
+  const { id, state,} = props;
   return (
-    <ListGroup >
+    <ListGroup>
       <ListGroup.Item>
         <span className="hk-label">Job URL:</span> {id}
       </ListGroup.Item>
