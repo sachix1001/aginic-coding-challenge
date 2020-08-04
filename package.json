@@ -19,8 +19,7 @@
     "throng": "^4.0.0"
   },
   "scripts": {
-    "nf": "nf start",
-    "start": "node ./server/",
+    "start": "nf start",
     "react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
