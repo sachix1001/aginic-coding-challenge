@@ -23,7 +23,7 @@ async function sendHttpCall(job) {
     return res.status;
   } catch (err) {
     console.error(`Error sending http request to ${job.URL}`);
-    const status = err.response.status ? err.response.status : 500;
+    const status = err.response ? err.response.status : 500;
     return status;
   }
 }
