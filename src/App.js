@@ -8,15 +8,25 @@ import axios from "axios";
 
 function App() {
   const [jobs, setJobs] = useState([]);
-  const [URL, setURL] = useState([]);
+  const [URL, setURL] = useState("");
   useEffect(() => {
-    axios.get("job/all").then((res) => {
-      setJobs(res.data);
-    });
+    fetchAllJobs();
   }, []);
 
   function onClick() {
+    if (typeof URL !== "string" || URL.length === 0) return;
     axios.post("job", { URL });
+    setURL("");
+  }
+
+  function fetchAllJobs() {
+    axios.get("job/all").then((res) => {
+      setJobs(res.data);
+    });
+  }
+  function checkValidityAndSetUrl(e) {
+    if (e.target.checkValidity() && e.target.value.length !== 0)
+      setURL(e.target.value);
   }
 
   return (
@@ -27,20 +37,23 @@ function App() {
             <Form.Label>Job URL</Form.Label>
             <Form.Control
               type="url"
+              id="url"
               placeholder="Enter URL"
               onChange={(e) => {
-                console.log("App -> e.target.value", URL);
-                setURL(e.target.value);
+                checkValidityAndSetUrl(e);
               }}
             />
           </Form.Group>
           <Button variant="primary" type="submit" onClick={onClick}>
             Submit
           </Button>
+          <Button variant="primary" type="submit" onClick={fetchAllJobs}>
+            Update
+          </Button>
         </Form>
       </div>
       <br />
-      <Form.Label>Job state</Form.Label>
+      <Form.Label>Job States</Form.Label>
       {jobs.map((job, i) => (
         <JobState
           id={job.URL}
