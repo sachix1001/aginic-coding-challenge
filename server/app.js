@@ -31,6 +31,7 @@ const setupServer = () => {
       res.sendStatus(500);
     }
   });
+
   app.get("/job/:id", async (req, res) => {
     const id = req.params.id;
     try {
@@ -53,6 +54,10 @@ const setupServer = () => {
       .then((job) => {
         res.status(201).json(job);
       });
+  });
+
+  app.get("/error", async (req, res) => {
+    res.sendStatus(404);
   });
 
   return app;

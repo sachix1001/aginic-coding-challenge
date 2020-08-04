@@ -44,10 +44,20 @@ function App() {
               }}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={onClick}>
+          <Button
+            className="btn"
+            variant="primary"
+            type="submit"
+            onClick={onClick}
+          >
             Submit
           </Button>
-          <Button variant="primary" type="submit" onClick={fetchAllJobs}>
+          <Button
+            className="btn"
+            variant="primary"
+            type="submit"
+            onClick={fetchAllJobs}
+          >
             Update
           </Button>
         </Form>
@@ -71,7 +81,7 @@ function JobState(props) {
   let { state } = props;
   state = completed ? state : "Processing...";
   return (
-    <ListGroup>
+    <ListGroup className="job-container">
       <ListGroup.Item>
         <span className="hk-label">Job URL:</span> {id}
       </ListGroup.Item>

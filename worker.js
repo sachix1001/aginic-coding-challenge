@@ -11,7 +11,7 @@ async function start() {
   }
   const jobQueue = jobs[0];
   const state = await sendHttpCall(jobQueue);
-  updateDb(jobQueue, state);
+  await updateDb(jobQueue, state);
 
   return start();
 }
@@ -23,7 +23,9 @@ async function sendHttpCall(job) {
     return res.status;
   } catch (err) {
     console.error(`Error sending http request to ${job.URL}`);
-    return 500;
+    console.log("sendHttpCall -> job.attempt", job.attempt)
+    const status = err.response.status || 500;
+    return status;
   }
 }
 

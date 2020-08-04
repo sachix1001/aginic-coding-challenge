@@ -1,3 +1,11 @@
-.container{
-  margin: 30px
+.container {
+  margin: 30px;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.job-container {
+  margin-bottom: 10px;
 }
