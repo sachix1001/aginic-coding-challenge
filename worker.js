@@ -23,7 +23,6 @@ async function sendHttpCall(job) {
     return res.status;
   } catch (err) {
     console.error(`Error sending http request to ${job.URL}`);
-    console.log("sendHttpCall -> job.attempt", job.attempt)
     const status = err.response.status || 500;
     return status;
   }
@@ -35,12 +34,12 @@ async function updateDb(job, state) {
   const hasJobFailed =
     state.toString()[0] === "4" || state.toString()[0] === "5";
 
-  if (hasJobFailed && job.attempt < 3) {
-    job.attempt++;
-  } else {
+  if (!hasJobFailed || job.attempt >= 2) {
     job.state = state;
     job.completed = true;
   }
+  job.attempt++;
+
   await db("job").where({ id: job.id }).update(job);
   return;
 }
