@@ -24,6 +24,10 @@ function App() {
       setJobs(res.data);
     });
   }
+  function clearJobs() {
+    axios.get("/clear");
+    setJobs([]);
+  }
   function checkValidityAndSetUrl(e) {
     if (e.target.checkValidity() && e.target.value.length !== 0)
       setURL(e.target.value);
@@ -38,6 +42,7 @@ function App() {
             <Form.Control
               type="url"
               id="url"
+              value={URL}
               placeholder="Enter URL"
               onChange={(e) => {
                 checkValidityAndSetUrl(e);
@@ -59,6 +64,14 @@ function App() {
             onClick={fetchAllJobs}
           >
             Update
+          </Button>
+          <Button
+            className="btn"
+            variant="primary"
+            type="submit"
+            onClick={clearJobs}
+          >
+            Clear
           </Button>
         </Form>
       </div>

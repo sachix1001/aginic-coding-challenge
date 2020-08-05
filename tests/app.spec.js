@@ -33,7 +33,7 @@ describe("API Server", () => {
       res.status.should.equal(200);
     });
   });
-
+  
   describe("POST /job", () => {
     afterEach(() => knex("job").del());
     it("should return status code 201", async () => {
@@ -44,6 +44,15 @@ describe("API Server", () => {
       await request.post("/job").send({ URL: "www.google.com" });
       const jobs = await knex.select().table("job");
       jobs.length.should.equal(1);
+    });
+  });
+
+  describe("GET /clear", () => {
+    it("should delete all data in database", async () => {
+      await knex("job").insert({ URL: "www.google.com" });
+      await request.get("/clear");
+      const data = await knex('job').select()
+      data.length.should.equal(0);
     });
   });
 
