@@ -29,7 +29,7 @@ async function sendHttpCall(job) {
 }
 
 async function updateDb(job, state) {
-  if (!job || !state) return;
+  if (!job || !job.URL || !state || typeof state !== "number") return -1;
 
   const hasJobFailed =
     state.toString()[0] === "4" || state.toString()[0] === "5";
@@ -45,3 +45,5 @@ async function updateDb(job, state) {
 }
 
 throng({ workers, start });
+
+module.exports = { updateDb, sendHttpCall, start };
