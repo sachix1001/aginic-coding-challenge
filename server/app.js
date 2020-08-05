@@ -56,8 +56,14 @@ const setupServer = () => {
       });
   });
 
+  // use for test error
   app.get("/error", async (req, res) => {
     res.sendStatus(404);
+  });
+
+  app.get("/clear", async (req, res) => {
+    await db("job").del();
+    res.sendStatus(200);
   });
 
   return app;
