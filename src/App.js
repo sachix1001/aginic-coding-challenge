@@ -46,7 +46,7 @@ function App() {
             <Form.Label>Job URL</Form.Label>
             <Form.Control
               type="url"
-              id="url"
+              // id="url"
               value={URL}
               placeholder="Enter URL"
               onChange={(e) => {

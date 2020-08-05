@@ -1,9 +1,18 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
+import App from "./App";
+import JobState from "./App";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+
+describe('App', () => {
+  test('renders App component', () => {
+    render(<App />);
+  });
 });
+describe('JobState', () => {
+  test('renders JobState component', () => {
+    render(<JobState />);
+  });
+});
+
