@@ -1,8 +1,6 @@
 const chai = require("chai");
 const { assert } = require("chai");
-const chaiHttp = require("chai-http");
 const { updateDb, sendHttpCall, wrapper } = require("../worker");
-const worker = require("../worker");
 const knex = require("../server/knex");
 const sinon = require("sinon");
 

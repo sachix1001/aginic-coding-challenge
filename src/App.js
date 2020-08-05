@@ -11,6 +11,11 @@ function App() {
   const [URL, setURL] = useState("");
   useEffect(() => {
     fetchAllJobs();
+    const autoUpdate = () => {
+      setInterval(fetchAllJobs, 5000);
+    };
+    autoUpdate();
+    return () => clearInterval(autoUpdate);
   }, []);
 
   function onClick() {
@@ -78,28 +83,23 @@ function App() {
       <br />
       <Form.Label>Job States</Form.Label>
       {jobs.map((job, i) => (
-        <JobState
-          id={job.URL}
-          state={job.state}
-          completed={job.completed}
-          key={i}
-        ></JobState>
+        <JobState job={job} key={i}></JobState>
       ))}
     </div>
   );
 }
 
 function JobState(props) {
-  const { id, completed } = props;
-  let { state } = props;
-  state = completed ? state : "Processing...";
+  const { job } = props;
+  const state = job.completed ? job.state : `Processing...`;
   return (
     <ListGroup className="job-container">
       <ListGroup.Item>
-        <span className="hk-label">Job URL:</span> {id}
+        <span className="hk-label">Job URL:</span> {job.URL}
       </ListGroup.Item>
       <ListGroup.Item>
         <span className="hk-label">State:</span> {state}
+        <span className="hk-label"> Attempt:</span> {job.attempt}
       </ListGroup.Item>
     </ListGroup>
   );

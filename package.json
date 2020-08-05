@@ -26,7 +26,7 @@
     "eject": "react-scripts eject",
     "dev": "nodemon ./server/",
     "serverTest": "node tests/initialize.js && mocha tests/app.spec.js",
-    "workerTest": "node tests/initialize.js && mocha tests/worker.spec.js "
+    "workerTest": "node tests/initialize.js && mocha tests/worker.spec.js"
   },
   "eslintConfig": {
     "extends": "react-app"

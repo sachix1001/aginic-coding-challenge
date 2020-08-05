@@ -2,6 +2,7 @@ const db = require("./server/knex");
 const throng = require("throng");
 const axios = require("axios");
 
+// use if multiple workers needed
 const workers = process.env.WEB_CONCURRENCY || 1;
 
 // wrap with an object for test purpose
@@ -51,6 +52,7 @@ async function updateDb(job, state) {
 
 wrapper.start();
 
+// use if multiple workers needed
 // throng({ workers, start });
 
 module.exports = { updateDb, sendHttpCall, wrapper };
