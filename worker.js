@@ -4,17 +4,22 @@ const axios = require("axios");
 
 const workers = process.env.WEB_CONCURRENCY || 1;
 
-async function start() {
-  const jobs = await db.where({ completed: false }).table("job");
-  if (!jobs || jobs.length === 0) {
-    return setTimeout(start, 30000);
-  }
-  const jobQueue = jobs[0];
-  const state = await sendHttpCall(jobQueue);
-  await updateDb(jobQueue, state);
+// wrap with an object for test purpose
+const wrapper = {
+  start: async function start() {
+    const jobs = await db.where({ completed: false }).table("job");
+    if (!jobs || jobs.length === 0) {
+      setTimeout(start, 30000);
+      return "no job";
+    }
+    const jobQueue = jobs[0];
+    const state = await sendHttpCall(jobQueue);
+    await updateDb(jobQueue, state);
 
-  return start();
-}
+    start();
+    return;
+  },
+};
 
 async function sendHttpCall(job) {
   try {
@@ -44,6 +49,8 @@ async function updateDb(job, state) {
   return;
 }
 
-throng({ workers, start });
+wrapper.start();
 
-module.exports = { updateDb, sendHttpCall, start };
+// throng({ workers, start });
+
+module.exports = { updateDb, sendHttpCall, wrapper };

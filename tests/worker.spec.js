@@ -1,8 +1,10 @@
 const chai = require("chai");
-const chaiHttp = require("chai-http");
 const { assert } = require("chai");
-const { updateDb, sendHttpCall, start } = require("../worker");
+const chaiHttp = require("chai-http");
+const { updateDb, sendHttpCall, wrapper } = require("../worker");
+const worker = require("../worker");
 const knex = require("../server/knex");
+const sinon = require("sinon");
 
 var expect = chai.expect;
 
@@ -32,7 +34,7 @@ describe("sendHttpCall", () => {
   });
 });
 
-describe("updateDB", () => {
+describe("function updateDB", () => {
   describe("handle input", () => {
     it("should return -1 if input is empty", async () => {
       const output = await updateDb();
@@ -58,7 +60,7 @@ describe("updateDB", () => {
     });
   });
 
-  describe("update database", () => {
+  describe("function update database", () => {
     afterEach(() => knex("job").del());
     it("able to connect to database", () =>
       knex
@@ -95,7 +97,7 @@ describe("updateDB", () => {
 
       expect(updatedJob[0].attempt).to.equal(1);
     });
-    
+
     it("should set 'state' with given state if three attempt failed", async () => {
       const job = {
         URL: "https://www.google.com/",
@@ -111,5 +113,24 @@ describe("updateDB", () => {
       expect(updatedJob[0].attempt).to.equal(3);
       expect(updatedJob[0].completed).to.equal(true);
     });
+  });
+});
+
+describe("function start()", () => {
+  const spy = sinon.spy(wrapper, "start");
+  afterEach(async () => {
+    await knex("job").del();
+    spy.restore();
+  });
+  it("should return start() after a job is don", async () => {
+    await knex("job").insert({ URL: "https://www.google.com/" });
+    spy();
+    expect(spy.callCount).to.equal(1);
+  });
+
+  it("should return 'no job' when there is no job to be done", async () => {
+    await knex("job").del();
+    const output = await wrapper.start();
+    expect(output).to.equal("no job");
   });
 });
