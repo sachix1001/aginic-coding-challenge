@@ -85,7 +85,7 @@ function App() {
         </Form>
       </div>
       <br />
-      <Form.Label>Job States</Form.Label>
+      {jobs.length > 0 && <Form.Label>Job States</Form.Label>}
       {jobs.map((job, i) => (
         <JobState job={job} key={i}></JobState>
       ))}
