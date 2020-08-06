@@ -46,7 +46,7 @@ function App() {
             <Form.Label>Job URL</Form.Label>
             <Form.Control
               type="url"
-              // id="url"
+              data-testid="url"
               value={URL}
               placeholder="Enter URL"
               onChange={(e) => {
@@ -55,9 +55,11 @@ function App() {
             />
           </Form.Group>
           <Button
+            id="submit"
             className="btn"
             variant="primary"
             type="submit"
+            data-testid="submit"
             onClick={onClick}
           >
             Submit
@@ -66,6 +68,7 @@ function App() {
             className="btn"
             variant="primary"
             type="submit"
+            data-testid="update"
             onClick={fetchAllJobs}
           >
             Update
@@ -74,6 +77,7 @@ function App() {
             className="btn"
             variant="primary"
             type="submit"
+            data-testid="clear"
             onClick={clearJobs}
           >
             Clear

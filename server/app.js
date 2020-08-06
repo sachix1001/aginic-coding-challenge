@@ -32,21 +32,6 @@ const setupServer = () => {
     }
   });
 
-  app.get("/job/:id", async (req, res) => {
-    const id = req.params.id;
-    try {
-      const job = await db.where({ id }).table("job");
-      if (job === null) {
-        res.status(404).end();
-      } else {
-        res.json(job);
-      }
-    } catch (err) {
-      console.error("Error loading locations!", err);
-      res.sendStatus(500);
-    }
-  });
-
   app.post("/job", async (req, res) => {
     const URL = req.body;
     db("job")

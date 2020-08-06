@@ -70,12 +70,4 @@ describe("API Server", () => {
       JSON.parse(res.text).length.should.equal(2);
     });
   });
-  // describe("GET /job/:id", () => {
-  //   beforeEach(() => knex("job").insert({ URL: "www.google.com" }));
-  //   afterEach(() => knex("job").del());
-  //   it("should return status code 200", async () => {
-  //     const res = await request.get("/job/1");
-  //     res.status.should.equal(200);
-  //   });
-  // });
 });
