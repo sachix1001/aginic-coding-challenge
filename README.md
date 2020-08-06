@@ -33,12 +33,12 @@
  - grab a list of jobs where 'completed' is false
  - send HTTP request to job's URL
  - check for jobs
-  - on startup
-  - on the completion of a previous job
-  - once every 30 seconds if there are no jobs in the queue.
+   - on startup
+   - on the completion of a previous job
+   - once every 30 seconds if there are no jobs in the queue.
  - update each job if HTTP request is
-  - successful or two previouse unsuccessfull attempts; status code, completed=true, attempt++
-  - unsuccessful: attempt++
+   - successful or two previouse unsuccessfull attempts; status code, completed=true, attempt++
+   - unsuccessful: attempt++
 
 
 ## Technology
