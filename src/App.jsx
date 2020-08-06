@@ -9,6 +9,7 @@ import axios from "axios";
 function App() {
   const [jobs, setJobs] = useState([]);
   const [URL, setURL] = useState("");
+  const [input, setInput] = useState("");
   useEffect(() => {
     fetchAllJobs();
     const autoUpdate = () => {
@@ -34,6 +35,7 @@ function App() {
     setJobs([]);
   }
   function checkValidityAndSetUrl(e) {
+    setInput(e.target.value);
     if (e.target.checkValidity() && e.target.value.length !== 0)
       setURL(e.target.value);
   }
@@ -47,7 +49,7 @@ function App() {
             <Form.Control
               type="url"
               data-testid="url"
-              value={URL}
+              value={input}
               placeholder="Enter URL"
               onChange={(e) => {
                 checkValidityAndSetUrl(e);
