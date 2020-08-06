@@ -1,5 +1,4 @@
 exports.up = function (knex) {
-  console.log("creating");
   return knex.schema.createTable("job", (table) => {
     table.increments().index().primary();
 

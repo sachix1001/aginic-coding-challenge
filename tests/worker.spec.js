@@ -65,7 +65,7 @@ describe("function updateDB", () => {
         .raw("select 1+1 as result")
         .catch(() => assert.fail("unable to connect to db")));
 
-    it("should update property state and completed when success status is passed", async () => {
+    it("should update property 'state' and 'completed' when success status is passed", async () => {
       const job = {
         URL: "https://www.google.com/",
         attempt: 0,
