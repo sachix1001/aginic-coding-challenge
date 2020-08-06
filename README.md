@@ -16,10 +16,10 @@
  - Auto update: all jobs are automatically updated every 10 seconds
  
 2. API server
- - GET '/job/all': return an array of all jobs
- - GET '/clear': delete all rows in the database
- - GET '/error/: returns 404 *for testing purpose
- - POST '/job': insert job in the database
+ - GET `/job/all`: return an array of all jobs
+ - GET `/clear`: delete all rows in the database
+ - GET `/error/`: returns 404 *for testing purpose
+ - POST `/job`: insert job in the database
  
 3. Data Persistence Layer
  - id: auto increment, primary
@@ -72,7 +72,10 @@ To test server:
 
 To test worker:
 
-`npm worker Test`
+`npm workerTest`
+
+To test front end:
+`npm test`
 
 To Start Server:
 
